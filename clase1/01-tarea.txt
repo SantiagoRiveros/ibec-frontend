@@ -1,0 +1,25 @@
+Tarea – Catálogo de videojuegos
+
+Crear una aplicación en React que funcione como un pequeño catálogo de videojuegos.
+
+Consigna
+
+La aplicación debe mostrar una colección de al menos 6 videojuegos.
+
+Cada videojuego debe tener:
+
+Nombre
+Género
+Plataforma
+Año de lanzamiento
+Una breve descripción
+Requisitos
+
+La aplicación debe estar dividida en componentes:
+
+Navbar
+GameList
+GameCard
+Footer
+
+El componente GameCard debe recibir los datos del videojuego mediante props.
