@@ -1,0 +1,80 @@
+npm = node package manager
+Sirve para administar los paquetes de node
+
+para verificar ambos:
+
+node -v 
+npm -v 
+
+Un paquete npm es codigo que otra persona o equipo publico para poder reutilizarlo
+
+package.json 
+Cuando trabajamos con proyectos javascript modernos aparece un archivo fundamental:
+
+package.json 
+
+Este archivo contiene informacion sobre nuestro proyecto.
+entre otras cosas
+-nombre del proyecto
+-version
+-scripts
+-dependencias
+-configuraciones de paquete 
+
+¿Que es una dependencia?
+
+es una herramienta o libreria que nuestr proyecto necesita para funcionar.
+
+Por ejemplo -> Mi aplicacion necesita React.
+Entonces react es una dependencia del proyecto 
+
+----------------------------------------------------------------------------
+
+Create React App
+
+Create-React-App  esta deprecado/no recomendado para proyectos nuevos.
+
+Historicamente fue la herramienta estandar para comenzar proyectos React y probablemente aparece en la mayoria de programas educativos.
+
+¿Que hace Create-React-APP (CRA)?
+Permitia generar automaticemente la estructura inicial de una aplicacion React. 
+
+En lugar de crear manualmente.
+-configuracion
+-dependencias 
+-Eestructura
+-scripts 
+-Servidor de desarrollo 
+La herramienta lo hace por nosotros 
+
+Create React App -> Crea Proyecto -> Configura herramientas -> Instala dependencias -> Proyecto React Listo
+
+Para crear proyecto:
+
+npx create-react-app NOMBRE_DE_LA_APP
+
+--------------------------------------------------------
+
+React no se utiliza solo para paginas web, tambien esta React Native que se utiliza para desarrollar aplicaciones de Android e iOS-
+
+---------------------------------------------------------
+
+Para usar VITE:
+
+npm create vite@latest
+
+----------------------------------------------------
+
+Reglas de React:
+
+todos los archivos que contengan html, deben tener la extension .jsx 
+
+Todos los componentes, deben comenzar con mayuscula.
+
+Los componentes solo pueden devolver  un elemento padre (este, peude tener todos los elementos hijos que queramos)
+
+Si no deseamos agregar un div, por ejemplo, para no romper la regla anterior, podemos usar
+react fragment <> </> que es una etiqueta vacia, y que no ocupa espacio en el DOM
+
+React, al final del dia, son funciones de Javascript, que en su retorno 
+devuelven HTML, este HTML es lo que se ve en pantalla
