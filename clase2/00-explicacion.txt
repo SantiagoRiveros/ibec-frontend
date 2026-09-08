@@ -1,0 +1,38 @@
+Hooks:
+
+Es una de las features mas usada y por lo que muchas veces se elige react.
+Son funciones especiales que te permiten usar el estado y el ciclo de vida dentro de los componentes.
+
+Ciclo de vida:
+Se llama ciclo de vida, a lo que abarca las 3 fases principales por las que pasa desde que aparece en la pantalla
+hasta que se elimina un componentes
+
+
+Nace - Se usa - Muere
+
+Se monta - Interaccion - Se desmonta
+
+useState me sirve para almacenar informacion que va a permanecer durante el ciclo de vida del componente
+
+const [contador, setContador] = useState(0); <- el estado es contador, su setter es setContador y su valor inicial 0
+
+
+contador = 3 <- esto no te lo permite
+setContador(3)
+
+la sintaxis es asi:
+
+const [nombre_del_estado, setter_del_estado] = useState(valor_inicial)
+
+el estado, se puede modificar su valor, solo a traves de su setter_del_estado
+
+{contador >= 10 ? <p>Demasiados clicks</p> : null}
+
+condicion ? que devuelve si se cumple : que devuelve si no se cumple
+
+el operador ternario, se puede concatenar
+
+Las props son informacion que un componente padre le pasa a su componente hijo
+
+Las props son de solo lectura para el componente que las recibe. es decir
+no deberiamos modificarlas nunca
