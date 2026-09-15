@@ -1,0 +1,27 @@
+
+
+.cheap{
+  color: green;
+  font-weight: bolder;
+}
+
+.expensive {
+  color: red;
+
+}
+
+article{
+
+  border: 1px gray solid;
+  border-radius: 8px;
+  margin-top: 8px
+}
+
+img{
+  max-width: 128px;
+}
+
+p{
+  max-width: 256px;
+  margin: auto
+}

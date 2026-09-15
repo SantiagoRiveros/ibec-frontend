@@ -1,0 +1,417 @@
+Renderizado, condicionales, y listas.
+
+Objetivos:
+
+-Mostrar contenido dependiendo de una condicion 
+-usar if antes del return 
+-usar operadores && para mostrar contenido 
+-utilizar operador ternario
+-recorrer arrays con map 
+-renderizar array de objetos 
+-utilizare key correctament 
+-combinar listas y renderizado condicional 
+
+¿Que significa renderizar?
+
+En react, nuestros componentes devuelven JSX:
+
+function App() {
+  return (
+    <h1>Hola mundo</h1>
+  );
+}
+
+React toma ese JSX y lo transforma en lo que vemos en el navegador.
+
+Podemos decir:
+
+Datos -> Logica -> JSX -> Pantalla
+
+const nombre = "Santiago";
+
+function App() {
+  return (
+    <h1>Hola {nombre}</h1>
+  );
+}
+
+Condicionales:
+
+En react no escribimos directamente un if
+dentro del JSX de esta manera:
+
+return (
+  <div>
+    if (usuario) {
+      <h1>Hola</h1>
+    }
+  </div>
+);
+
+Esto es incorrecto, el if pertenece a Javascript
+mientras que dentro del return estamos escribiendo JSX 
+
+Tenemos varias formas de resolverlo.
+
+poniendo el if antes del return:
+
+import "./App.css";
+
+function App() {
+  const edad = 16;
+  if (edad >= 18) {
+    return <h1>Es mayor de edad</h1>;
+  }
+  return <h1>Es menor de edad</h1>;
+}
+
+export default App;
+
+----------------------------
+
+Muchas veces, no queremos devolver componentes diferentes
+
+import "./App.css";
+
+function App() {
+  const edad = 18;
+
+  return (
+    <div>
+      <h1>Bienvenido.</h1>
+
+      {edad >= 18 && <p>Podes ingresar</p>}
+    </div>
+  );
+}
+
+export default App;
+
+
+la parte importante es: 
+      {edad >= 18 && <p>Podes ingresar</p>}
+
+significa:
+SI edad >= 18
+    mostrar <p>
+SI NO:
+    no hacer nada
+
+
+El operador &&
+Es Javascript, no es algo exclusivo de react.
+
+Por ejemplo:
+true && "Hola"
+
+devuelve -> "Hola" 
+
+false && "Hola"
+
+devuelve -> false 
+
+React aprovecha esto para mostrar u ocultar elementos
+
+import "./App.css";
+
+function App() {
+  const tiendaPermiso = true;
+
+  return (
+    <div>
+      <h1>Bienvenido.</h1>
+
+      {tiendaPermiso && <button>Ingresar </button>}
+    </div>
+  );
+}
+
+export default App;
+
+
+--------------------------------------
+
+EJEMPLO:
+import "./App.css";
+
+function App() {
+  const esAdmin = true;
+
+  return (
+    <div>
+      <h1>Panel de usuario</h1>
+
+      {esAdmin && <button>Administrar usuarios</button>}
+    </div>
+  );
+}
+
+export default App;
+
+Usuario normal
+├── Inicio
+├── Productos
+└── Perfil
+
+Administrador
+├── Inicio
+├── Productos
+├── Perfil
+└── Administrar usuarios
+
+------------------------------------
+
+Operador ternario:
+
+La estructura es:
+
+condicion ? valorSiTrue : valorSiFalse
+
+Ejemplo:
+
+import "./App.css";
+
+function App() {
+  const edad = 12;
+
+  const mensaje = edad >= 18 ? "Es mayor" : "Es menor";
+
+  return (
+    <div>
+      <h1>Bienvenido</h1>
+      {mensaje}
+    </div>
+  );
+}
+
+export default App;
+
+
+import "./App.css";
+
+function App() {
+  const edad = 19;
+
+  return (
+    <div>
+      <h1>Bienvenido</h1>
+      {edad >= 18 ? <h1>Podes ingresar</h1> : <h1>No podes ingresar</h1>}
+    </div>
+  );
+}
+
+export default App;
+
+
+condición
+   ↓
+¿verdadero?
+ ↙        ↘
+SI        NO
+ ↓         ↓
+JSX       JSX
+
+----------------------------------
+
+&& vs ternario
+
+&&
+Cuando queremos:
+Mostrar algo o no mostrar nada.
+
+{logueado && <button>Mi perfil</button>}
+
+Ternario 
+Cuando queremos:
+Mostrar una cosa u otra 
+
+{
+    logueado
+    ? <button>Mi Perfil</button>
+    : <button>Iniciar Sesion</button>
+}
+
+¿Hay algo que mostrar solamente si se cumple?
+        ↓
+       &&
+
+¿Tengo dos posibilidades?
+        ↓
+     ternario
+
+
+----------------------------------
+
+
+import "./App.css";
+
+function App() {
+  const nombres = ["Juan", "Pedro", "María", "Lucía"];
+
+  return (
+    <div>
+      <h1>Bienvenido</h1>
+      <p>{nombres[0]}</p>
+      <p>{nombres[1]}</p>
+      <p>{nombres[2]}</p>
+      <p>{nombres[3]}</p>
+    </div>
+  );
+}
+
+export default App;
+
+-------------------------------
+
+Buen ejemplo:
+
+import "./App.css";
+
+function App() {
+  const nombres = ["Juan", "Pedro", "María", "Lucía"];
+
+  return (
+    <div>
+      <h1>Bienvenido</h1>
+      {nombres.map((nombre) => (
+        <p>{nombre}</p>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+
+¿Que esta pasando?
+
+     {nombres.map((nombre) => (
+        <p>{nombre}</p>
+      ))}
+
+Podemos imaginar esto como:
+
+["Juan", "Pedro", "Ana"] ->
+map
+Juan -> <p>Juan</p>
+Pedro -> <p>Pedro</p> 
+Ana -> <p>Ana</p>
+
+---------------------
+
+Cuando hacemos:
+
+     {nombres.map((nombre) => (
+        <p>{nombre}</p>
+      ))}
+
+React nos va a dar un warning en consola:
+Each child in list should have unique "key" prop.
+
+Tenemos que agregar la propiedad key 
+
+Para que sirve key?
+
+React necesita saber cual elemento de una lista es cual.
+
+Por ejemplo:
+Juan
+Pedro
+Maria
+
+Despues:
+Juan
+Pedro 
+Lucia
+
+React puede identificar:
+
+Juan -> Sigue siendo Juan 
+Pedro -> Sigue siendo Pedro
+Maria -> desaparecio 
+Ana -> Aparecio 
+
+La key, ayuda react a manejar eficientemente estos cambios 
+y a poder identificar sus elementos.
+
+-----------------------
+
+Lista de objetos:
+
+import "./App.css";
+
+function App() {
+  const usuarios = [
+    {
+      id: 1,
+      nombre: "Juan",
+      edad: 25,
+    },
+    {
+      id: 2,
+      nombre: "Pedro",
+      edad: 30,
+    },
+    {
+      id: 3,
+      nombre: "María",
+      edad: 22,
+    },
+  ];
+
+  return (
+    <div>
+      <h1>Bienvenido</h1>
+      {usuarios.map((usuario) => (
+        <div key={usuario.id}>
+          <h2>{usuario.nombre}</h2>
+          <p>Edad: {usuario.edad}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+
+---------------------------------------
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+
+function App() {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos")
+      .then((data) => setTodos(data.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return (
+    <div>
+      <h1>Todo List</h1>
+      {todos.length ? (
+        todos.map((todo) => {
+          return (
+            <article key={todo.id}>
+              <h2>{todo.title}</h2>
+              {todo.completed ? (
+                <p className="completed">Completo</p>
+              ) : (
+                <p className="todo">Incompleto</p>
+              )}
+            </article>
+          );
+        })
+      ) : (
+        <p>Cargando</p>
+      )}
+    </div>
+  );
+}
+
+export default App;

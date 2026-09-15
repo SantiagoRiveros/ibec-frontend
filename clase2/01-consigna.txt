@@ -1,0 +1,55 @@
+Consigna
+Crear una aplicación llamada "Selector de perfil".
+La aplicación debe tener tres componentes:
+App
+│
+├── Profile
+│
+└── ProfileSelector
+
+1. Componente Profile
+Debe recibir mediante props:
+nombre
+edad
+profesion
+Y mostrar:
+-------------------------
+Perfil
+
+Nombre: Juan
+Edad: 24
+Profesión: Diseñador
+
+-------------------------
+Por ejemplo:
+<Profile
+    nombre="Juan"
+    edad={24}
+    profesion="Diseñador"
+/>
+
+2. Estado en App
+En App crear un estado para guardar el perfil seleccionado.
+Por ejemplo:
+const [perfil, setPerfil] = useState({
+    nombre: "Juan",
+    edad: 24,
+    profesion: "Diseñador"
+});
+El componente Profile deberá recibir esos datos mediante props.
+
+3. Componente ProfileSelector
+Crear un componente que tenga tres botones:
+[ Juan ] [ María ] [ Carlos ]
+Cuando el usuario haga click en un botón, debe cambiar el perfil mostrado.
+Por ejemplo:
+Perfil actual:
+
+Nombre: Juan
+Edad: 24
+Profesión: Diseñador
+
+
+[ Juan ] [ María ] [ Carlos ]
+Si se presiona:
+[ María ]
