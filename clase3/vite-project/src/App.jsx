@@ -20,7 +20,6 @@ function App() {
           return (
             <article key={product.id}>
               <h2>{product.title}</h2>
-
               {product.price >= 50 ? (
                 <h4 className="expensive">${product.price} (CARO)</h4>
               ) : (

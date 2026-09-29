@@ -1,0 +1,213 @@
+Repaso rapido: Eventos
+
+En HTML/Javascript podemos tener:
+
+<button onclick="saludar()">
+    Saludar
+</button>
+
+En React usamos:
+
+<button onClick={saludar}>
+    Saludar
+</button>
+
+-----------------------------------
+
+Eventos sinteticos.
+
+React historicamente uso un sistema que se llamaba SyntheticEvent para proporcionar
+una interfaz consistente para los Eventos
+
+cuando hacemos:
+function manejarClick(event) {
+    console.log(event);
+}
+
+el objeto event es el evento que react entrega al handler
+
+La idea importante para esto es:
+
+React normaliza la formaq en que trabajamos con eventos desde nuestro componentes
+
+---------------------------------------
+
+Eventos soportados:
+
+React soporta muchos eventos.
+
+Los mas importantes son:
+
+Mouse:
+-onClick
+-onDoubleClick
+-onMouseEnter
+-onMouseLeave
+
+Teclado:
+-onKeyDown
+-onKeyUp
+
+Formularios:
+-onChange
+-onInput
+-onSubmit
+-onFocus
+-onBlur
+
+Otros:
+-onScroll
+-onCopy
+-onPaste
+
+Los evento sque utilizamos dependen de la interaccion que queremos controlar.
+
+--------------------------------
+
+
+Tenemos:
+
+<input type="text" />
+
+el usuario escribe:
+Armando
+
+Donde esta ese valor dentro de nuestro componente?
+
+React no lo esta guardando automaticamente en una variable nuestra.
+
+Para manejar correctamente el formulario necesitamos relacionar:
+
+input -> State -> React 
+
+Aca aparecen los formularios o componentes controlados
+
+¿Porque se llama controlado?
+Porque React controla el valor del input
+
+Tenemos:
+value={user}
+
+El valor mostrado por el input depende del estado de react.
+
+Y:
+onChange()
+
+actualiza ese estado
+por eso: State -> Controla -> Input 
+
+
+----------------------------------
+
+  function handleChange(event) {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+Supongamos que nuestro estado actualmente es:
+user = {
+  nombre: "Juan",
+  email: "juan@gmail.com",
+  edad: "25"
+}
+
+cuando hacemos:
+{
+    ...user
+}
+
+estamos copiando todas las propiedades (o claves) de user.
+
+¿Porque hacemos esto?
+
+Porque no queremos borrar las propiedades que no estamos modificando
+en el onChange.
+
+¿Que pasa si no ponemos ...user?
+
+supongamos:
+
+setUser({
+    email: "santiago@mail.com"
+})
+
+el nuevo estado quedaria asi:
+
+{
+    email: "santiago@mail.com"
+}
+
+Ahora viene lo raro: [event.target.name]
+
+Es una propiedad CALCULADA de un objeto:
+
+vamos a algo mas sencillo:
+
+cont nombre = "email"
+
+const user = {
+    [nombre] : "juan@gmial.com"
+}
+
+Javascript interpreta -> [nombre] = "email"
+
+entonces termina siendo:
+
+const user = {
+    [nombre] : "Juan@gmail.com"
+}
+
+--------------------------------
+
+useRef:
+import { useRef } from "react";
+
+yhacemos:
+
+const inputRef = useRef(null)
+
+Esto va a crear un objeto que inicialmente es:
+
+{
+    current: null
+}
+
+la propiedad importante es -> inputRef.current 
+
+Pensemoslo como una cajita que nos da react para guardar una referencia.
+
+Inicialmente:
+
+input ref -> current: null 
+
+Todavia no apunta a ningun elemento.
+
+Como hacemos que apunte al input?
+
+<input ref={inputRef} />
+
+Le estamos diciendo a React:
+
+"Quiero que inputRef sea la referencia de este elemento"
+
+Entonces despues de que react rendferiza el componente, podemos pensar que tenemos:
+
+inputRef -> current -> input
+
+como inputRef representa al input podemos usar metodos del elemento.
+
+por ejemplo:
+
+inputRef.current.focus();
+
+es como decirle: Agarra al input donde se hace referencia y hace focus()
+
+¿Porque usamos esto, y no useState?
+
+useState -> sirve para guardar informacion que forma parte del estado.
+
+useRef -> Sirve entre otras cosas para conservar una referencia a un elemento
+
+o un valor sin provocar un nuevo render si cambia el current
