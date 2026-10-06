@@ -211,3 +211,9 @@ useState -> sirve para guardar informacion que forma parte del estado.
 useRef -> Sirve entre otras cosas para conservar una referencia a un elemento
 
 o un valor sin provocar un nuevo render si cambia el current
+
+Pero... para que quiero usar useRef?
+
+se usa cuando vos quere acceder directamente a un elemento del dom o guardar
+un valor entre renders sin que cambiarlo provoque un render.
+

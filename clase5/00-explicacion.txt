@@ -1,0 +1,20 @@
+para instalar react-router-dom -> npm install react-router-dom
+
+instalar prop-types:
+
+npm install prop-types
+
+PropTypes:
+
+Proptypes indica cuales van a ser los tipos de las variables que ingresan como props
+a un componente:
+
+tenemos tipos principales:
+
+PropTypes.string -> string, ejemplo: "Hola"
+PropTypes.number -> number, ejemplo: 32
+PropTypes.bool -> booleano, ejemplo: true
+PropTypes.array -> array, ejemplo: ["Banana", "frutilla", "kiwi"]
+PropTypes.object -> objeto, ejemplo: {nombre: "santiago", apellido: "riveros"}
+PropTypes.func -> funcion, ejemplo function saludar(){ return "Hola" }
+PropTypes.node -> nodo de HTML, ejemplo: un children
