@@ -1,0 +1,28 @@
+1. Agregar prioridad a las tareas
+Modificar la acción addTask del Store para que cada tarea tenga una propiedad priority.
+
+Las prioridades disponibles serán:
+- Baja
+- Media
+- Alta
+Modificar TaskForm.jsx para incorporar un <select> que permita elegir la prioridad al crear una tarea.
+
+Ejemplo de una tarea:
+{
+  id: 123456,
+  title: "Estudiar React",
+  completed: false,
+  priority: "Alta"
+}
+
+2. Mostrar la prioridad en pantalla
+Modificar TaskItem.jsx para que cada tarea muestre:
+- Su título.
+- Su prioridad.
+- Su estado (Pendiente o Completada).
+- Un botón para marcarla como completada.
+- Un botón para eliminarla.
+La prioridad debe poder distinguirse visualmente. Por ejemplo:
+- Alta: rojo.
+- Media: naranja.
+- Baja: verde.

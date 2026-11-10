@@ -1,0 +1,99 @@
+Persistencia de datos:
+
+¿Que problemas queremos resolver?
+
+Supongamos que estamos creando una aplicacion (web o movil) y tenemos esta estructura:
+
+App ->  Header
+                    -> Task item
+    ->  TaskList
+
+Tenemos una lista de tareas, que necesitamos utilizar en diferentes componentes.
+
+Una primera solucion, seria guardar el estado en App y pasar lainformacion mediante props.
+
+Ejemplo:
+
+function App() {
+
+    const [tasks, setTasks] = useState([]);
+
+    return (
+        <>
+            <Header tasks={tasks} />
+
+            <TaskList
+                tasks={tasks}
+                setTasks={setTasks}
+            />
+        </>
+    );
+}
+
+Pero... imaginemos que tenemos dies componentes y diferentes niveles de "profundidad"
+
+¿Que sucede?
+
+-Tenemos que pasar props entre componentes.
+-Algunos componentes reciben informacion que no utilizan.
+-Las modificaciones se vuelven mas dificiles de organizar.
+-El arbol de componentes empieza a depender demasiado de la propagacion de props.
+
+A este problema se le conoce como PROPS DRILLING.
+
+(Basicamente, transportar en muchos niveles de profunidad una prop)
+
+Componente padre -> 10 niveles de profundidad... -> Recibe otro componente esa prop.
+
+Esto, ademas, trae MUCHOS problemas de rendimiento.
+
+Entonces... que solucion estaria buena?
+
+Componente padre (envia las props directamente al componente destino) -> 
+10 niveles de profundidad... -> Otro componente (Este recibe directamente las props, sin pasar
+por los 10 niveles de profundidad)
+
+¿Que es el estado global?
+Es informacion que necesitamos compartir entre diferentes componentes de una aplicacion,
+independiemente de donde esten ubicados en el arbol de componentes.
+
+Algunos ejemplos:
+-Usuario autenticado.
+-Carrito de compras. 
+-Preferencias del Usuario
+-Notificaciones
+-Lista de tareas.
+-Modo oscuro/claro
+
+En ligar de pasar informacion de un componente a otro, vamos a tener un lugar centralizado
+donde podremos consultar y modificar esa informacion.
+
+Ese lugar sera nuestro store.
+
+Para eso, se podria o bien usar Redux (Herramienta "nativa" de react) pero en este caso
+con fines educativos y con la idea de simplificar el proceso, usaremos Zustand.
+
+¿Que es zustand?
+Es una biblioteca de gestion de estados para aplicaciones Javascript,
+especialmente usada en React.
+
+Zustand nos va a permitir usar un storeque pueda ser utilizado desde cualquier componente.
+
+Sus principales caracteristicas:
+-Es liviano.
+-Tiene una API sencilla
+-No requiere envolver toda la aplicacion en Providers.
+-Permite acceder al estado desde cualquier componente.
+-Permite modificar el estado mediante accciones.
+
+Conceptos clave:
+Store -> Lugar donde guardamos el estado global.
+State -> Los datos que vamos a compartir.
+Actions -> Funciones que modifican el estado (Similar a los setters)
+Selectors -> Funciones que permiten seleccionar partes del estado. (Getter)
+
+Una comparacion:
+-useState: Estado local de un componente.
+-Context API: permite compartir informacion mediante el arbol de componentes.
+-Zustand: Administra un store global al que los componentes pueden suscribirse.
+
